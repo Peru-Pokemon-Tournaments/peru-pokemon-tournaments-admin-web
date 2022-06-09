@@ -22,6 +22,7 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
+    name: "Home",
     path: "/",
     component: HomeView,
     meta: {

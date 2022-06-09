@@ -4,22 +4,61 @@
       <template #header>
         <h1>Ingresar</h1>
       </template>
-      <form>
+      <form @submit.prevent="submit">
         <div class="form-group">
           <label>Email</label>
-          <base-input type="email" />
+          <base-input type="email" v-model="email" />
         </div>
         <div class="form-group">
           <label>Contraseña</label>
-          <base-input type="password" />
+          <base-input type="password" v-model="password" />
         </div>
         <div class="center">
-          <base-button>Iniciar Sesión</base-button>
+          <span v-if="isLoadingLogin">Ingresando...</span>
+          <base-button v-else>Iniciar Sesión</base-button>
         </div>
       </form>
     </base-card>
   </div>
 </template>
+<script lang="ts">
+import { defineComponent } from "vue";
+import { mapActions, mapState } from "pinia";
+import { useAuthStore } from "@/stores/auth";
+
+export default defineComponent({
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  computed: {
+    ...mapState(useAuthStore, ["isLoggedIn", "isLoadingLogin"]),
+  },
+  methods: {
+    ...mapActions(useAuthStore, ["loginUser"]),
+    async submit(): Promise<void> {
+      await this.loginUser({
+        email: this.email,
+        password: this.password,
+      });
+    },
+    clearForm(): void {
+      this.email = "";
+      this.password = "";
+    },
+  },
+  watch: {
+    isLoggedIn() {
+      this.clearForm();
+      this.$router.push({
+        name: "Home",
+      });
+    },
+  },
+});
+</script>
 <style lang="scss" scoped>
 @include form-group;
 @include layout;

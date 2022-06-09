@@ -10,14 +10,35 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
-import TheNavbar from "@/components/layout/TheNavbar.vue";
 import TheSidebar from "@/components/layout/TheSidebar.vue";
+import TheNavbar from "@/components/layout/TheNavbar.vue";
+import { useAuthStore } from "@/stores/auth";
+import { mapActions, mapState } from "pinia";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   components: {
     TheNavbar,
     TheSidebar,
+  },
+  computed: {
+    ...mapState(useAuthStore, ["isLoggedIn"]),
+  },
+  methods: {
+    ...mapActions(useAuthStore, ["tryLogInFromCache"]),
+  },
+  watch: {
+    isLoggedIn(): void {
+      if (!this.isLoggedIn) {
+        this.$router.push({ name: "Login" });
+      }
+    },
+  },
+  beforeMount(): void {
+    this.tryLogInFromCache();
+    if (!this.isLoggedIn) {
+      this.$router.push({ name: "Login" });
+    }
   },
 });
 </script>
