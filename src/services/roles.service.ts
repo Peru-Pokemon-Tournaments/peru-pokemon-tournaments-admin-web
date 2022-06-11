@@ -1,9 +1,4 @@
-import {
-  API_DOMAIN,
-  FETCH_PEOPLE,
-  FETCH_ROLES,
-} from "@/config/services-uri.config";
-import { Person } from "@/models/person.model";
+import { API_DOMAIN, FETCH_ROLES } from "@/config/services-uri.config";
 import { Role } from "@/models/role.model";
 import { AxiosError, AxiosInstance } from "axios";
 import { PaginatedResponse } from "./interfaces/paginated-response";
