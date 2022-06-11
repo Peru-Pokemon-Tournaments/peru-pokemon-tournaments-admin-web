@@ -4,21 +4,22 @@ import * as FarIcons from "@fortawesome/free-regular-svg-icons";
 
 const addIcons = () => {
   const selectedFasIcons: FasIcons.IconDefinition[] = [
-    FasIcons.faChessBishop,
-    FasIcons.faGamepad,
-    FasIcons.faListOl,
     FasIcons.faBalanceScale,
+    FasIcons.faChessBishop,
     FasIcons.faClipboardCheck,
-    FasIcons.faShapes,
-    FasIcons.faPoll,
-    FasIcons.faKey,
-    FasIcons.faUser,
     FasIcons.faEdit,
-    FasIcons.faTrash,
-    FasIcons.faEye,
-    FasIcons.faExchangeAlt,
     FasIcons.faEllipsisH,
+    FasIcons.faExchangeAlt,
+    FasIcons.faEye,
+    FasIcons.faGamepad,
+    FasIcons.faKey,
+    FasIcons.faListOl,
+    FasIcons.faPoll,
+    FasIcons.faShapes,
+    FasIcons.faSignOutAlt,
+    FasIcons.faTrash,
     FasIcons.faTrashAlt,
+    FasIcons.faUser,
   ];
 
   const selectedFarIcons: FarIcons.IconDefinition[] = [FarIcons.faHeart];
