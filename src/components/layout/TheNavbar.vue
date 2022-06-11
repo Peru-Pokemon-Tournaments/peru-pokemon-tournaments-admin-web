@@ -1,11 +1,17 @@
 <template>
   <nav>
     <div v-if="isLoggedIn">
-      <h2>The Navbar</h2>
+      <h2><strong>Perú Pokémon Tournaments Admin</strong></h2>
       <ul>
-        <li>{{ loggedUser.name }}</li>
         <li>
-          <a href="/logout" @click.prevent="logout">Cerrar Sesión</a>
+          <base-badge color="success">
+            {{ loggedUser.name }}
+          </base-badge>
+        </li>
+        <li>
+          <a href="/logout" @click.prevent="logout">
+            Salir <base-icon icon="sign-out-alt" />
+          </a>
         </li>
       </ul>
     </div>
@@ -34,10 +40,26 @@ nav div {
   display: flex;
   flex-direction: row;
   align-items: center;
-}
+  justify-content: space-between;
 
-ul {
-  display: flex;
-  flex-direction: row;
+  h2 {
+    font-weight: bold;
+  }
+
+  a {
+    color: $app-navbar-font-color;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  ul {
+    li {
+      display: inline-block;
+      margin-left: 10px;
+    }
+  }
 }
 </style>
