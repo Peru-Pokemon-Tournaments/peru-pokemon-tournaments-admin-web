@@ -13,6 +13,12 @@ const addIcons = () => {
     FasIcons.faPoll,
     FasIcons.faKey,
     FasIcons.faUser,
+    FasIcons.faEdit,
+    FasIcons.faTrash,
+    FasIcons.faEye,
+    FasIcons.faExchangeAlt,
+    FasIcons.faEllipsisH,
+    FasIcons.faTrashAlt,
   ];
 
   const selectedFarIcons: FarIcons.IconDefinition[] = [FarIcons.faHeart];
