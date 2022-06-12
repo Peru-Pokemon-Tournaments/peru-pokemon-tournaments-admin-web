@@ -93,3 +93,14 @@
     align-items: center;
   }
 }
+
+@mixin tableLayout {
+  @for $i from 1 to 13 {
+    .wrap-#{$i} {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+      max-width: calc(1rem * #{$i});
+    }
+  }
+}
