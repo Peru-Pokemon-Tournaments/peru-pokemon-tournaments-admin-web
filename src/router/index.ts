@@ -161,6 +161,10 @@ const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
+  {
+    path: "/:notFound(.*)",
+    redirect: "/",
+  },
 ];
 
 const routeLinks = routes[1].children

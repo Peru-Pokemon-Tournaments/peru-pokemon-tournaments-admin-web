@@ -1,6 +1,5 @@
 import { routeLinks } from "@/router/index";
 import { defineStore } from "pinia";
-import { RouteRecordRaw } from "vue-router";
 import * as Types from "./types";
 
 export const useNavigationStore = defineStore("useNavigation", {
