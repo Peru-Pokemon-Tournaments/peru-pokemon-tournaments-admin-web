@@ -1,4 +1,3 @@
-import { Role } from "@/models/role.model";
 import { TournamentRule } from "@/models/tournament-rule.model";
 
 export interface TournamentRulesStoreState {
