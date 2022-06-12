@@ -34,6 +34,7 @@ const routes: Array<RouteRecordRaw> = [
         name: "People",
         component: PeopleView,
         meta: {
+          onSidebarName: "Personas",
           inSidebar: true,
           icon: {
             prefix: "fas",
@@ -47,6 +48,7 @@ const routes: Array<RouteRecordRaw> = [
         name: "Roles",
         component: RolesView,
         meta: {
+          onSidebarName: "Roles",
           inSidebar: true,
           icon: {
             prefix: "fas",
@@ -60,6 +62,7 @@ const routes: Array<RouteRecordRaw> = [
         name: "Devices",
         component: DevicesView,
         meta: {
+          onSidebarName: "Dispositivos",
           inSidebar: true,
           icon: {
             prefix: "fas",
@@ -73,6 +76,7 @@ const routes: Array<RouteRecordRaw> = [
         name: "Games",
         component: GamesView,
         meta: {
+          onSidebarName: "Juegos",
           inSidebar: true,
           icon: {
             prefix: "fas",
@@ -86,6 +90,7 @@ const routes: Array<RouteRecordRaw> = [
         name: "Game Generations",
         component: GameGenerationsView,
         meta: {
+          onSidebarName: "Generaciones de Juegos",
           inSidebar: true,
           icon: {
             prefix: "fas",
@@ -99,6 +104,7 @@ const routes: Array<RouteRecordRaw> = [
         name: "Tournament rules",
         component: TournamentRulesView,
         meta: {
+          onSidebarName: "Reglas de Torneos",
           inSidebar: true,
           icon: {
             prefix: "fas",
@@ -112,6 +118,7 @@ const routes: Array<RouteRecordRaw> = [
         name: "Tournament Systems",
         component: TournamentSystemsView,
         meta: {
+          onSidebarName: "Sistemas de Torneos",
           inSidebar: true,
           icon: {
             prefix: "fas",
@@ -125,6 +132,7 @@ const routes: Array<RouteRecordRaw> = [
         name: "Tournament Types",
         component: TournamentTypesView,
         meta: {
+          onSidebarName: "Tipos de Torneos",
           inSidebar: true,
           icon: {
             prefix: "fas",
@@ -151,6 +159,7 @@ const routes: Array<RouteRecordRaw> = [
         name: "Tournaments",
         component: TournamentsView,
         meta: {
+          onSidebarName: "Torneos",
           inSidebar: true,
           icon: {
             prefix: "fas",
@@ -170,7 +179,7 @@ const routes: Array<RouteRecordRaw> = [
 const routeLinks = routes[1].children
   ?.filter((route: RouteRecordRaw) => route?.meta?.inSidebar)
   .map((route: RouteRecordRaw) => ({
-    name: route.name,
+    name: route?.meta?.onSidebarName,
     path: route.path,
     icon: {
       prefix: (route?.meta?.icon as any)?.prefix as string,
