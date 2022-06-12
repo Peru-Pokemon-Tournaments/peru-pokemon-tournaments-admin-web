@@ -133,7 +133,7 @@ const routes: Array<RouteRecordRaw> = [
         },
         children: [],
       },
-      {
+      /* {
         path: "/tournaments/results",
         name: "Tournament Results",
         component: TournamentResultsView,
@@ -145,7 +145,7 @@ const routes: Array<RouteRecordRaw> = [
           },
         },
         children: [],
-      },
+      },*/
       {
         path: "/tournaments",
         name: "Tournaments",
