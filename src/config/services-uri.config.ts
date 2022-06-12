@@ -9,3 +9,4 @@ export const FETCH_ROLES = "/api/roles";
 export const FETCH_TOURNAMENT_RULES = "/api/tournament-rules";
 export const FETCH_TOURNAMENT_SYSTEMS = "/api/tournament-systems";
 export const FETCH_TOURNAMENT_TYPES = "/api/tournament-types";
+export const FETCH_TOURNAMENTS = "/api/tournaments";
