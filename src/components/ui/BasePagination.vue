@@ -10,7 +10,7 @@
       >
         {{ page }}
       </button>
-      <button :disabled="!canNext" @click="toNextPage">Next</button>
+      <button :disabled="!canNext" @click="toNextPage">Sig</button>
     </div>
   </div>
 </template>
@@ -70,10 +70,10 @@ export default defineComponent({
       return buttonNumbers;
     },
     canNext(): boolean {
-      return this.currentButtonBlock !== this.maxButtonBlocks;
+      return this.currentPage != this.totalPages;
     },
     canPrev(): boolean {
-      return this.currentButtonBlock !== 1;
+      return this.currentPage != 1;
     },
   },
   methods: {
