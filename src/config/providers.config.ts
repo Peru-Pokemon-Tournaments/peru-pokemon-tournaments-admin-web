@@ -7,6 +7,10 @@ import {
 import { ApiGamesService, GamesService } from "@/services/games.service";
 import { ApiPeopleService, PeopleService } from "@/services/people.service";
 import { ApiRolesService, RolesService } from "@/services/roles.service";
+import {
+  ApiTournamentRulesService,
+  TournamentRulesService,
+} from "@/services/tournament-rules.service";
 import axios, { AxiosInstance } from "axios";
 const httpClient: AxiosInstance = axios.create();
 
@@ -17,6 +21,8 @@ const gameGenerationsService: GameGenerationsService =
 const gamesService: GamesService = new ApiGamesService(httpClient);
 const peopleService: PeopleService = new ApiPeopleService(httpClient);
 const rolesService: RolesService = new ApiRolesService(httpClient);
+const tournamentRulesService: TournamentRulesService =
+  new ApiTournamentRulesService(httpClient);
 
 const ServiceProvider = {
   authService,
@@ -25,6 +31,7 @@ const ServiceProvider = {
   gamesService,
   peopleService,
   rolesService,
+  tournamentRulesService,
 };
 
 export default ServiceProvider;
