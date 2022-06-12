@@ -19,6 +19,10 @@ import {
   ApiTournamentTypesService,
   TournamentTypesService,
 } from "@/services/tournament-types.service";
+import {
+  ApiTournamentsService,
+  TournamentsService,
+} from "@/services/tournaments.service";
 import axios, { AxiosInstance } from "axios";
 const httpClient: AxiosInstance = axios.create();
 
@@ -35,6 +39,9 @@ const tournamentSystemsService: TournamentSystemsService =
   new ApiTournamentSystemsService(httpClient);
 const tournamentTypesService: TournamentTypesService =
   new ApiTournamentTypesService(httpClient);
+const tournamentsService: TournamentsService = new ApiTournamentsService(
+  httpClient
+);
 
 const ServiceProvider = {
   authService,
@@ -46,6 +53,7 @@ const ServiceProvider = {
   tournamentRulesService,
   tournamentSystemsService,
   tournamentTypesService,
+  tournamentsService,
 };
 
 export default ServiceProvider;
