@@ -1,4 +1,5 @@
 import { API_DOMAIN, FETCH_PEOPLE } from "@/config/services-uri.config";
+import { PersonJson } from "@/models/jsons/person.json";
 import { Person } from "@/models/person.model";
 import { AxiosError, AxiosInstance } from "axios";
 import { PaginatedResponse } from "./interfaces/paginated-response";
@@ -37,7 +38,7 @@ export class ApiPeopleService implements PeopleService {
         },
       });
       return new PaginatedResponse(
-        response.data?.people?.map((person: object) => Person.fromJson(person)),
+        response.data?.people?.map((json: PersonJson) => Person.fromJson(json)),
         response.data?.current_page,
         response.data?.last_page,
         response.data?.per_page,
