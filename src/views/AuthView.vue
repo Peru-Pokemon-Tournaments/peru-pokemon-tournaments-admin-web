@@ -2,7 +2,9 @@
   <div id="auth">
     <base-card>
       <template #header>
-        <h1>Ingresar</h1>
+        <picture class="center">
+          <img :src="logoImageAsset" height="150" />
+        </picture>
       </template>
       <form @submit.prevent="submit">
         <div class="form-group">
@@ -35,6 +37,9 @@ export default defineComponent({
   },
   computed: {
     ...mapState(useAuthStore, ["isLoggedIn", "isLoadingLogin"]),
+    logoImageAsset() {
+      return require("@/assets/img/logo.png");
+    },
   },
   methods: {
     ...mapActions(useAuthStore, ["loginUser"]),
