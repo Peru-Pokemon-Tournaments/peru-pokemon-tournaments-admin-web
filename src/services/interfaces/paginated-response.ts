@@ -1,6 +1,6 @@
 import { Serializable } from "@/models/contracts/serializable";
 
-export class PaginatedResponse<T extends Serializable> {
+export class PaginatedResponse<T> {
   constructor(
     private _data: T[],
     private _currentPage: number,
