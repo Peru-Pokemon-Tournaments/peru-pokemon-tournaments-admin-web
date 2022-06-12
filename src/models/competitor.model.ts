@@ -1,6 +1,7 @@
 import { Serializable } from "./contracts/serializable";
+import { CompetitorJson } from "./jsons/competitor.json";
 
-export class Competitor implements Serializable {
+export class Competitor implements Serializable<CompetitorJson> {
   constructor(
     private _id: string,
     private _nickName: string,
@@ -19,11 +20,11 @@ export class Competitor implements Serializable {
     return this._fullName;
   }
 
-  public static fromJson(json: any): Competitor {
+  public static fromJson(json: CompetitorJson): Competitor {
     return new Competitor(json["id"], json["nick_name"], json["full_name"]);
   }
 
-  public toJson(): object {
+  public toJson(): CompetitorJson {
     return {
       id: this.id,
       full_name: this.fullName,

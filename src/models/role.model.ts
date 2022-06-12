@@ -1,9 +1,10 @@
 import { Serializable } from "./contracts/serializable";
+import { RoleJson } from "./jsons/role.json";
 
-export class Role implements Serializable {
+export class Role implements Serializable<RoleJson> {
   constructor(private _id: string, private _name: string) {}
 
-  public static fromJson(json: { id: string; name: string }): Role {
+  public static fromJson(json: RoleJson): Role {
     return new Role(json["id"], json["name"]);
   }
 
@@ -15,7 +16,7 @@ export class Role implements Serializable {
     return this._name;
   }
 
-  public toJson(): object {
+  public toJson(): RoleJson {
     return {
       id: this._id,
       name: this._name,

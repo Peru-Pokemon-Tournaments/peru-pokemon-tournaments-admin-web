@@ -1,17 +1,14 @@
 import { Serializable } from "./contracts/serializable";
+import { GameGenerationJson } from "./jsons/game-generation.json";
 
-export class GameGeneration implements Serializable {
+export class GameGeneration implements Serializable<GameGenerationJson> {
   constructor(
     private _id: string,
     private _generation: string,
     private _description: string
   ) {}
 
-  public static fromJson(json: {
-    id: string;
-    generation: string;
-    description: string;
-  }): GameGeneration {
+  public static fromJson(json: GameGenerationJson): GameGeneration {
     return new GameGeneration(
       json["id"],
       json["generation"],
@@ -31,7 +28,7 @@ export class GameGeneration implements Serializable {
     return this._description;
   }
 
-  public toJson(): object {
+  public toJson(): GameGenerationJson {
     return {
       id: this._id,
       generation: this._generation,

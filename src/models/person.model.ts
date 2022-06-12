@@ -1,6 +1,7 @@
 import { Serializable } from "./contracts/serializable";
+import { PersonJson } from "./jsons/person.json";
 
-export class Person implements Serializable {
+export class Person implements Serializable<PersonJson> {
   constructor(
     private _id: string,
     private _firstName: string,
@@ -19,11 +20,11 @@ export class Person implements Serializable {
     return this._lastName;
   }
 
-  public static fromJson(json: any): Person {
+  public static fromJson(json: PersonJson): Person {
     return new Person(json["id"], json["first_name"], json["last_name"]);
   }
 
-  public toJson(): object {
+  public toJson(): PersonJson {
     return {
       id: this.id,
       first_name: this.firstName,

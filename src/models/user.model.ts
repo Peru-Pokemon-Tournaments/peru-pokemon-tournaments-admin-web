@@ -1,8 +1,9 @@
 import { Competitor } from "./competitor.model";
 import { Serializable } from "./contracts/serializable";
+import { UserJson } from "./jsons/user.json";
 import { Person } from "./person.model";
 
-export class User implements Serializable {
+export class User implements Serializable<UserJson> {
   constructor(
     private _id: string,
     private _name: string,
@@ -31,7 +32,7 @@ export class User implements Serializable {
     return this._competitor;
   }
 
-  public static fromJson(json: any): User {
+  public static fromJson(json: UserJson): User {
     return new User(
       json["id"],
       json["name"],
@@ -41,7 +42,7 @@ export class User implements Serializable {
     );
   }
 
-  public toJson(): object {
+  public toJson(): UserJson {
     return {
       id: this.id,
       name: this.name,
