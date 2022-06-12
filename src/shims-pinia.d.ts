@@ -7,6 +7,7 @@ import { PeopleService } from "./services/people.service";
 import { RolesService } from "./services/roles.service";
 import { TournamentRulesService } from "./services/tournament-rules.service";
 import { TournamentSystemsService } from "./services/tournament-systems.service";
+import { TournamentTypesService } from "./services/tournament-types.service";
 
 declare module "pinia" {
   export interface PiniaCustomProperties {
@@ -18,5 +19,6 @@ declare module "pinia" {
     rolesService: RolesService;
     tournamentRulesService: TournamentRulesService;
     tournamentSystemsService: TournamentSystemsService;
+    tournamentTypesService: TournamentTypesService;
   }
 }
