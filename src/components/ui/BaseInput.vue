@@ -7,6 +7,7 @@
     @blur="focusOut"
     @focus="focusIn"
     step="any"
+    :disabled="disabled"
   />
   <div class="error" v-if="!isValid">
     <slot name="error">
@@ -34,6 +35,10 @@ export default defineComponent({
     isValid: {
       type: Boolean as PropType<boolean>,
       default: true,
+    },
+    disabled: {
+      type: Boolean as PropType<boolean>,
+      default: false,
     },
   },
   methods: {
@@ -65,6 +70,12 @@ input {
   &:active {
     outline-color: $app-primary-color;
     outline-style: solid;
+  }
+
+  &:disabled {
+    border-color: $app-disabled-color;
+    background-color: $app-disabled-color;
+    color: $app-primary-font-color;
   }
 }
 
