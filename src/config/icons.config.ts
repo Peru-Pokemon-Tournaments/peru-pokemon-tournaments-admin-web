@@ -17,6 +17,7 @@ const addIcons = () => {
     FasIcons.faPoll,
     FasIcons.faShapes,
     FasIcons.faSignOutAlt,
+    FasIcons.faTimes,
     FasIcons.faTrash,
     FasIcons.faTrashAlt,
     FasIcons.faUser,
