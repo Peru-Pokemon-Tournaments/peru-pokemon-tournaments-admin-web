@@ -49,7 +49,8 @@ export default defineComponent({
   data() {
     return {
       tournamentSystemDTO: {
-        name: "" as string,
+        name: "",
+        description: "",
       } as CreateOrEditTournamentSystemDTO,
       isSubmitted: false,
     };
@@ -81,7 +82,7 @@ export default defineComponent({
       return true;
     },
     isValidForm(): boolean {
-      return this.isValidName;
+      return this.isValidName && this.isValidDescription;
     },
     isEditing(): boolean {
       return (
