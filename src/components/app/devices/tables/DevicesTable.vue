@@ -50,18 +50,34 @@
     :total-pages="totalPages"
     @select-page="loadDevices"
   />
+  <base-modal
+    title="Editar Dispositivo"
+    type="tiny"
+    :open="isEditModalOpen"
+    @close="isEditModalOpen = false"
+  >
+    <create-or-edit-device-form
+      :current-id="currentId"
+      @after-submit="toggleEditModal"
+    />
+  </base-modal>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 import { mapActions, mapState } from "pinia";
 import { Device } from "@/models/device.model";
 import { useDevicesStore } from "@/stores/devices";
+import CreateOrEditDeviceForm from "../forms/CreateOrEditDeviceForm.vue";
 
 export default defineComponent({
+  components: {
+    CreateOrEditDeviceForm,
+  },
   data() {
     return {
       selectedDevice: null as Device | null,
       isPopoverOpen: false,
+      isEditModalOpen: false,
       tableActions: [
         {
           key: "devices/edit",
@@ -83,7 +99,15 @@ export default defineComponent({
       "currentPage",
       "perPage",
       "isLoadingDevices",
+      "devicesHasChanged",
     ]),
+    currentId(): string | null {
+      if (this.selectedDevice && this.isEditModalOpen) {
+        return this.selectedDevice.id;
+      }
+
+      return null;
+    },
   },
   methods: {
     ...mapActions(useDevicesStore, ["fetchDevices"]),
@@ -112,14 +136,24 @@ export default defineComponent({
     },
     onSelectAction(actionKey: string): void {
       switch (actionKey) {
-        case "device/edit":
-          // TODO: Handler edit
+        case "devices/edit":
+          this.toggleEditModal();
           break;
-        case "device/delete":
+        case "devices/delete":
           // TODO: Handler delete
           break;
       }
       this.isPopoverOpen = false;
+    },
+    toggleEditModal(): void {
+      this.isEditModalOpen = !this.isEditModalOpen;
+    },
+  },
+  watch: {
+    devicesHasChanged(changed: boolean): void {
+      if (changed) {
+        this.fetchDevices();
+      }
     },
   },
   mounted(): void {
