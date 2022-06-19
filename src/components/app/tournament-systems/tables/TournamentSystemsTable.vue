@@ -57,18 +57,34 @@
     :total-pages="totalPages"
     @select-page="loadTournamentSystems"
   />
+  <base-modal
+    title="Editar Sistema de Torneo"
+    type="medium"
+    :open="isEditModalOpen"
+    @close="isEditModalOpen = false"
+  >
+    <create-or-edit-tournament-system-form
+      :current-id="currentId"
+      @after-submit="toggleEditModal"
+    />
+  </base-modal>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 import { mapActions, mapState } from "pinia";
 import { TournamentSystem } from "@/models/tournament-system.model";
 import { useTournamentSystemsStore } from "@/stores/tournament-systems";
+import CreateOrEditTournamentSystemForm from "../forms/CreateOrEditTournamentSystemForm.vue";
 
 export default defineComponent({
+  components: {
+    CreateOrEditTournamentSystemForm,
+  },
   data() {
     return {
       selectedTournamentSystem: null as TournamentSystem | null,
       isPopoverOpen: false,
+      isEditModalOpen: false,
       tableActions: [
         {
           key: "tournament-systems/edit",
@@ -90,7 +106,15 @@ export default defineComponent({
       "currentPage",
       "perPage",
       "isLoadingTournamentSystems",
+      "tournamentSystemsHasChanged",
     ]),
+    currentId(): string | null {
+      if (this.selectedTournamentSystem && this.isEditModalOpen) {
+        return this.selectedTournamentSystem.id;
+      }
+
+      return null;
+    },
   },
   methods: {
     ...mapActions(useTournamentSystemsStore, ["fetchTournamentSystems"]),
@@ -120,13 +144,23 @@ export default defineComponent({
     onSelectAction(actionKey: string): void {
       switch (actionKey) {
         case "tournament-systems/edit":
-          // TODO: Handler edit
+          this.toggleEditModal();
           break;
         case "tournament-systems/delete":
           // TODO: Handler delete
           break;
       }
       this.isPopoverOpen = false;
+    },
+    toggleEditModal(): void {
+      this.isEditModalOpen = !this.isEditModalOpen;
+    },
+  },
+  watch: {
+    tournamentSystemsHasChanged(changed: boolean): void {
+      if (changed) {
+        this.fetchTournamentSystems();
+      }
     },
   },
   mounted(): void {
