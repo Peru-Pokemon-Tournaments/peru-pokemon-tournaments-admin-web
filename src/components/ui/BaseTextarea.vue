@@ -5,6 +5,7 @@
     :bind="$attrs"
     :rows="rows"
     @blur="focusOut"
+    :disabled="disabled"
   ></textarea>
   <div class="error" v-if="!isValid">
     <slot name="error">
@@ -31,6 +32,10 @@ export default defineComponent({
     rows: {
       type: Number as PropType<number>,
       default: 3,
+    },
+    disabled: {
+      type: Boolean as PropType<boolean>,
+      default: false,
     },
   },
   methods: {
@@ -59,6 +64,12 @@ textarea {
   &:active {
     outline-color: $app-primary-color;
     outline-style: solid;
+  }
+
+  &:disabled {
+    border-color: $app-disabled-color;
+    background-color: $app-disabled-color;
+    color: $app-primary-font-color;
   }
 }
 
