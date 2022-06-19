@@ -56,18 +56,34 @@
     :total-pages="totalPages"
     @select-page="loadGameGenerations"
   />
+  <base-modal
+    title="Editar Generación de Juego"
+    type="small"
+    :open="isEditModalOpen"
+    @close="isEditModalOpen = false"
+  >
+    <create-or-edit-game-generation-form
+      :current-id="currentId"
+      @after-submit="toggleEditModal"
+    />
+  </base-modal>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 import { mapActions, mapState } from "pinia";
 import { GameGeneration } from "@/models/game-generation.model";
 import { useGameGenerationsStore } from "@/stores/game-generations";
+import CreateOrEditGameGenerationForm from "../forms/CreateOrEditGameGenerationForm.vue";
 
 export default defineComponent({
+  components: {
+    CreateOrEditGameGenerationForm,
+  },
   data() {
     return {
       selectedGameGeneration: null as GameGeneration | null,
       isPopoverOpen: false,
+      isEditModalOpen: false,
       tableActions: [
         {
           key: "game-generations/edit",
@@ -89,7 +105,15 @@ export default defineComponent({
       "currentPage",
       "perPage",
       "isLoadingGameGenerations",
+      "gameGenerationsHasChanged",
     ]),
+    currentId(): string | null {
+      if (this.selectedGameGeneration && this.isEditModalOpen) {
+        return this.selectedGameGeneration.id;
+      }
+
+      return null;
+    },
   },
   methods: {
     ...mapActions(useGameGenerationsStore, ["fetchGameGenerations"]),
@@ -119,13 +143,23 @@ export default defineComponent({
     onSelectAction(actionKey: string): void {
       switch (actionKey) {
         case "game-generations/edit":
-          // TODO: Handler edit
+          this.toggleEditModal();
           break;
         case "game-generations/delete":
           // TODO: Handler delete
           break;
       }
       this.isPopoverOpen = false;
+    },
+    toggleEditModal(): void {
+      this.isEditModalOpen = !this.isEditModalOpen;
+    },
+  },
+  watch: {
+    gameGenerationsHasChanged(changed: boolean): void {
+      if (changed) {
+        this.fetchGameGenerations();
+      }
     },
   },
   mounted(): void {
