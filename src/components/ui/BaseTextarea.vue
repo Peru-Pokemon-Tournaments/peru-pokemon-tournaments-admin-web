@@ -53,6 +53,7 @@ textarea {
   //   height: 1.5rem;
   //   padding: 1;
   width: 100%;
+  resize: vertical;
 
   &:focus,
   &:active {
