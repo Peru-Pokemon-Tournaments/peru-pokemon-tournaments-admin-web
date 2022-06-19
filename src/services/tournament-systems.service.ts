@@ -71,9 +71,10 @@ export class ApiTournamentSystemsService implements TournamentSystemsService {
         response.data?.total_pages
       );
     } catch (error: any | Error | AxiosError) {
-      throw new ResponseError(error.response.data.message, {
-        fields: [error.response.data.message],
-      });
+      throw new ResponseError(
+        error.response.data.message,
+        error.response.data.errors
+      );
     }
   }
 
@@ -94,9 +95,10 @@ export class ApiTournamentSystemsService implements TournamentSystemsService {
 
       return new BasicResponse(response.data?.message);
     } catch (error: any | Error | AxiosError) {
-      throw new ResponseError(error.response.data.message, {
-        fields: [error.response.data.message],
-      });
+      throw new ResponseError(
+        error.response.data.message,
+        error.response.data.errors
+      );
     }
   }
 
@@ -123,9 +125,10 @@ export class ApiTournamentSystemsService implements TournamentSystemsService {
         TournamentSystem.fromJson(response.data?.tournament_system)
       );
     } catch (error: any | Error | AxiosError) {
-      throw new ResponseError(error.response.data.message, {
-        fields: [error.response.data.message],
-      });
+      throw new ResponseError(
+        error.response.data.message,
+        error.response.data.errors
+      );
     }
   }
 
@@ -151,9 +154,10 @@ export class ApiTournamentSystemsService implements TournamentSystemsService {
 
       return new BasicResponse(response.data?.message);
     } catch (error: any | Error | AxiosError) {
-      throw new ResponseError(error.response.data.message, {
-        fields: [error.response.data.message],
-      });
+      throw new ResponseError(
+        error.response.data.message,
+        error.response.data.errors
+      );
     }
   }
 }

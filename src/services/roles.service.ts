@@ -64,9 +64,10 @@ export class ApiRolesService implements RolesService {
         response.data?.total_pages
       );
     } catch (error: any | Error | AxiosError) {
-      throw new ResponseError(error.response.data.message, {
-        fields: [error.response.data.message],
-      });
+      throw new ResponseError(
+        error.response.data.message,
+        error.response.data.errors
+      );
     }
   }
 
@@ -87,9 +88,10 @@ export class ApiRolesService implements RolesService {
 
       return new BasicResponse(response.data?.message);
     } catch (error: any | Error | AxiosError) {
-      throw new ResponseError(error.response.data.message, {
-        fields: [error.response.data.message],
-      });
+      throw new ResponseError(
+        error.response.data.message,
+        error.response.data.errors
+      );
     }
   }
 
@@ -112,9 +114,10 @@ export class ApiRolesService implements RolesService {
         Role.fromJson(response.data?.role)
       );
     } catch (error: any | Error | AxiosError) {
-      throw new ResponseError(error.response.data.message, {
-        fields: [error.response.data.message],
-      });
+      throw new ResponseError(
+        error.response.data.message,
+        error.response.data.errors
+      );
     }
   }
 
@@ -136,9 +139,10 @@ export class ApiRolesService implements RolesService {
 
       return new BasicResponse(response.data?.message);
     } catch (error: any | Error | AxiosError) {
-      throw new ResponseError(error.response.data.message, {
-        fields: [error.response.data.message],
-      });
+      throw new ResponseError(
+        error.response.data.message,
+        error.response.data.errors
+      );
     }
   }
 }

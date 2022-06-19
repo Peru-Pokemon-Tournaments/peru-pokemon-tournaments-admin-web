@@ -8,8 +8,8 @@ export class ResponseError extends Error {
 
   public get errors(): string[] {
     const errors: string[] = [];
-    for (const field in this._errors["fields"]) {
-      for (const error of this._errors["fields"][field]) {
+    for (const field in this._errors) {
+      for (const error of this._errors[field]) {
         errors.push(error);
       }
     }

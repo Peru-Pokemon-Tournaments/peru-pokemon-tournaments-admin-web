@@ -31,9 +31,10 @@ export class ApiAuthService implements AuthService {
         message: response?.data?.message as string,
       };
     } catch (error: any | Error | AxiosError) {
-      throw new ResponseError(error.response.data.message, {
-        fields: [error.response.data.message],
-      });
+      throw new ResponseError(
+        error.response.data.message,
+        error.response.data.errors
+      );
     }
   }
 }

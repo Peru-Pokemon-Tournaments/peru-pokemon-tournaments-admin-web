@@ -74,9 +74,10 @@ export class ApiGameGenerationsService implements GameGenerationsService {
         response.data?.total_pages
       );
     } catch (error: any | Error | AxiosError) {
-      throw new ResponseError(error.response.data.message, {
-        fields: error.response.data.errors,
-      });
+      throw new ResponseError(
+        error.response.data.message,
+        error.response.data.errors
+      );
     }
   }
 
@@ -97,9 +98,10 @@ export class ApiGameGenerationsService implements GameGenerationsService {
 
       return new BasicResponse(response.data?.message);
     } catch (error: any | Error | AxiosError) {
-      throw new ResponseError(error.response.data.message, {
-        fields: error.response.data.errors,
-      });
+      throw new ResponseError(
+        error.response.data.message,
+        error.response.data.errors
+      );
     }
   }
 
@@ -123,9 +125,10 @@ export class ApiGameGenerationsService implements GameGenerationsService {
         GameGeneration.fromJson(response.data?.game_generation)
       );
     } catch (error: any | Error | AxiosError) {
-      throw new ResponseError(error.response.data.message, {
-        fields: error.response.data.errors,
-      });
+      throw new ResponseError(
+        error.response.data.message,
+        error.response.data.errors
+      );
     }
   }
 
@@ -148,9 +151,10 @@ export class ApiGameGenerationsService implements GameGenerationsService {
 
       return new BasicResponse(response.data?.message);
     } catch (error: any | Error | AxiosError) {
-      throw new ResponseError(error.response.data.message, {
-        fields: error.response.data.errors,
-      });
+      throw new ResponseError(
+        error.response.data.message,
+        error.response.data.errors
+      );
     }
   }
 }
