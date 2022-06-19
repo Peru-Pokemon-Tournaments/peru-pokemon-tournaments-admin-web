@@ -13,9 +13,14 @@ export const FETCH_TOURNAMENTS = "/api/tournaments";
 
 export const CREATE_ROLE = "/api/roles";
 export const CREATE_DEVICE = "/api/devices";
+export const CREATE_TOURNAMENT_SYSTEM = "/api/tournament-systems";
 
 export const GET_ROLE = "/api/roles/:roleId";
 export const GET_DEVICE = "/api/devices/:deviceId";
+export const GET_TOURNAMENT_SYSTEM =
+  "/api/tournament-systems/:tournamentSystemId";
 
 export const UPDATE_ROLE = "/api/roles/:roleId";
 export const UPDATE_DEVICE = "/api/devices/:deviceId";
+export const UPDATE_TOURNAMENT_SYSTEM =
+  "/api/tournament-systems/:tournamentSystemId";
