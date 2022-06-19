@@ -52,18 +52,34 @@
     :total-pages="totalPages"
     @select-page="loadRoles"
   />
+  <base-modal
+    title="Editar Rol"
+    type="tiny"
+    :open="isEditModalOpen"
+    @close="isEditModalOpen = false"
+  >
+    <create-or-edit-role-form
+      :current-id="currentId"
+      @after-submit="toggleEditModal"
+    />
+  </base-modal>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 import { mapActions, mapState } from "pinia";
 import { Role } from "@/models/role.model";
 import { useRolesStore } from "@/stores/roles";
+import CreateOrEditRoleForm from "../forms/CreateOrEditRoleForm.vue";
 
 export default defineComponent({
+  components: {
+    CreateOrEditRoleForm,
+  },
   data() {
     return {
       selectedRole: null as Role | null,
       isPopoverOpen: false,
+      isEditModalOpen: false,
       tableActions: [
         {
           key: "roles/edit",
@@ -85,7 +101,15 @@ export default defineComponent({
       "currentPage",
       "perPage",
       "isLoadingRoles",
+      "rolesHasChanged",
     ]),
+    currentId(): string | null {
+      if (this.selectedRole && this.isEditModalOpen) {
+        return this.selectedRole.id;
+      }
+
+      return null;
+    },
   },
   methods: {
     ...mapActions(useRolesStore, ["fetchRoles"]),
@@ -114,14 +138,24 @@ export default defineComponent({
     },
     onSelectAction(actionKey: string): void {
       switch (actionKey) {
-        case "role/edit":
-          // TODO: Handler edit
+        case "roles/edit":
+          this.toggleEditModal();
           break;
-        case "role/delete":
+        case "roles/delete":
           // TODO: Handler delete
           break;
       }
       this.isPopoverOpen = false;
+    },
+    toggleEditModal(): void {
+      this.isEditModalOpen = !this.isEditModalOpen;
+    },
+  },
+  watch: {
+    rolesHasChanged(changed: boolean): void {
+      if (changed) {
+        this.fetchRoles();
+      }
     },
   },
   mounted(): void {
