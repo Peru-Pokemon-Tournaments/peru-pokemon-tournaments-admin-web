@@ -52,18 +52,34 @@
     :total-pages="totalPages"
     @select-page="loadTournamentTypes"
   />
+  <base-modal
+    title="Editar Tipo de Torneo"
+    type="tiny"
+    :open="isEditModalOpen"
+    @close="isEditModalOpen = false"
+  >
+    <create-or-edit-tournament-type-form
+      :current-id="currentId"
+      @after-submit="toggleEditModal"
+    />
+  </base-modal>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 import { mapActions, mapState } from "pinia";
 import { TournamentType } from "@/models/tournament-type.model";
 import { useTournamentTypesStore } from "@/stores/tournament-types";
+import CreateOrEditTournamentTypeForm from "../forms/CreateOrEditTournamentTypeForm.vue";
 
 export default defineComponent({
+  components: {
+    CreateOrEditTournamentTypeForm,
+  },
   data() {
     return {
       selectedTournamentType: null as TournamentType | null,
       isPopoverOpen: false,
+      isEditModalOpen: false,
       tableActions: [
         {
           key: "tournament-types/edit",
@@ -85,7 +101,15 @@ export default defineComponent({
       "currentPage",
       "perPage",
       "isLoadingTournamentTypes",
+      "tournamentTypesHasChanged",
     ]),
+    currentId(): string | null {
+      if (this.selectedTournamentType && this.isEditModalOpen) {
+        return this.selectedTournamentType.id;
+      }
+
+      return null;
+    },
   },
   methods: {
     ...mapActions(useTournamentTypesStore, ["fetchTournamentTypes"]),
@@ -115,13 +139,23 @@ export default defineComponent({
     onSelectAction(actionKey: string): void {
       switch (actionKey) {
         case "tournament-types/edit":
-          // TODO: Handler edit
+          this.toggleEditModal();
           break;
         case "tournament-types/delete":
           // TODO: Handler delete
           break;
       }
       this.isPopoverOpen = false;
+    },
+    toggleEditModal(): void {
+      this.isEditModalOpen = !this.isEditModalOpen;
+    },
+  },
+  watch: {
+    tournamentTypesHasChanged(changed: boolean): void {
+      if (changed) {
+        this.fetchTournamentTypes();
+      }
     },
   },
   mounted(): void {
