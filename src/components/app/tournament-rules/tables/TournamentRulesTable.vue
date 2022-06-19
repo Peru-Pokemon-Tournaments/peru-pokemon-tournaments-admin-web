@@ -56,18 +56,34 @@
     :total-pages="totalPages"
     @select-page="loadTournamentRules"
   />
+  <base-modal
+    title="Editar Sistema de Torneo"
+    type="medium"
+    :open="isEditModalOpen"
+    @close="isEditModalOpen = false"
+  >
+    <create-or-edit-tournament-rule-form
+      :current-id="currentId"
+      @after-submit="toggleEditModal"
+    />
+  </base-modal>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 import { mapActions, mapState } from "pinia";
 import { TournamentRule } from "@/models/tournament-rule.model";
 import { useTournamentRulesStore } from "@/stores/tournament-rules";
+import CreateOrEditTournamentRuleForm from "../forms/CreateOrEditTournamentRuleForm.vue";
 
 export default defineComponent({
+  components: {
+    CreateOrEditTournamentRuleForm,
+  },
   data() {
     return {
       selectedTournamentRule: null as TournamentRule | null,
       isPopoverOpen: false,
+      isEditModalOpen: false,
       tableActions: [
         {
           key: "tournament-rules/edit",
@@ -89,7 +105,15 @@ export default defineComponent({
       "currentPage",
       "perPage",
       "isLoadingTournamentRules",
+      "tournamentRulesHasChanged",
     ]),
+    currentId(): string | null {
+      if (this.selectedTournamentRule && this.isEditModalOpen) {
+        return this.selectedTournamentRule.id;
+      }
+
+      return null;
+    },
   },
   methods: {
     ...mapActions(useTournamentRulesStore, ["fetchTournamentRules"]),
@@ -119,13 +143,23 @@ export default defineComponent({
     onSelectAction(actionKey: string): void {
       switch (actionKey) {
         case "tournament-rules/edit":
-          // TODO: Handler edit
+          this.toggleEditModal();
           break;
         case "tournament-rules/delete":
           // TODO: Handler delete
           break;
       }
       this.isPopoverOpen = false;
+    },
+    toggleEditModal(): void {
+      this.isEditModalOpen = !this.isEditModalOpen;
+    },
+  },
+  watch: {
+    tournamentRulesHasChanged(changed: boolean): void {
+      if (changed) {
+        this.fetchTournamentRules();
+      }
     },
   },
   mounted(): void {
