@@ -28,6 +28,7 @@ export default defineComponent({
       return {
         block: this.block,
         [this.color]: true,
+        chip: true,
       };
     },
   },
@@ -39,7 +40,7 @@ export default defineComponent({
 });
 </script>
 <style lang="scss" scoped>
-div {
+.chip {
   padding: 0.5rem 0.8rem;
   display: inline-block;
   border-radius: 1rem;
