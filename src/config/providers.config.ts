@@ -1,3 +1,7 @@
+import {
+  AppApiOptionsService,
+  AppOptionsService,
+} from "@/services/app-options.service";
 import { ApiAuthService, AuthService } from "@/services/auth.service";
 import { ApiDevicesService, DevicesService } from "@/services/devices.service";
 import {
@@ -26,6 +30,9 @@ import {
 import axios, { AxiosInstance } from "axios";
 const httpClient: AxiosInstance = axios.create();
 
+const appOptionsService: AppOptionsService = new AppApiOptionsService(
+  httpClient
+);
 const authService: AuthService = new ApiAuthService(httpClient);
 const devicesService: DevicesService = new ApiDevicesService(httpClient);
 const gameGenerationsService: GameGenerationsService =
@@ -44,6 +51,7 @@ const tournamentsService: TournamentsService = new ApiTournamentsService(
 );
 
 const ServiceProvider = {
+  appOptionsService,
   authService,
   devicesService,
   gameGenerationsService,
