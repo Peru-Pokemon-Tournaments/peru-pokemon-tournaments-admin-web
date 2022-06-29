@@ -1,4 +1,5 @@
 import "pinia";
+import { AppOptionsService } from "./services/app-options.service";
 import { AuthService } from "./services/auth.service";
 import { DevicesService } from "./services/devices.service";
 import { GameGenerationsService } from "./services/game-generations.service";
@@ -12,6 +13,7 @@ import { TournamentsService } from "./services/tournaments.service";
 
 declare module "pinia" {
   export interface PiniaCustomProperties {
+    appOptionsService: AppOptionsService;
     authService: AuthService;
     devicesService: DevicesService;
     gameGenerationsService: GameGenerationsService;
