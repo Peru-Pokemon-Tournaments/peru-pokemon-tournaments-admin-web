@@ -123,8 +123,9 @@ export class AppApiOptionsService implements AppOptionsService {
       );
       return new ResourcedResponse(
         response.data?.message,
-        response.data?.roles.map((tournamentFormatJson: TournamentFormatJson) =>
-          TournamentFormat.fromJson(tournamentFormatJson)
+        response.data?.tournament_formats.map(
+          (tournamentFormatJson: TournamentFormatJson) =>
+            TournamentFormat.fromJson(tournamentFormatJson)
         )
       );
     } catch (error: any | Error | AxiosError) {
@@ -142,8 +143,9 @@ export class AppApiOptionsService implements AppOptionsService {
       );
       return new ResourcedResponse(
         response.data?.message,
-        response.data?.roles.map((tournamentRuleJson: TournamentRuleJson) =>
-          TournamentRule.fromJson(tournamentRuleJson)
+        response.data?.tournament_rules.map(
+          (tournamentRuleJson: TournamentRuleJson) =>
+            TournamentRule.fromJson(tournamentRuleJson)
         )
       );
     } catch (error: any | Error | AxiosError) {
@@ -161,8 +163,9 @@ export class AppApiOptionsService implements AppOptionsService {
       );
       return new ResourcedResponse(
         response.data?.message,
-        response.data?.roles.map((tournamentSystemJson: TournamentSystemJson) =>
-          TournamentSystem.fromJson(tournamentSystemJson)
+        response.data?.tournament_systems.map(
+          (tournamentSystemJson: TournamentSystemJson) =>
+            TournamentSystem.fromJson(tournamentSystemJson)
         )
       );
     } catch (error: any | Error | AxiosError) {
@@ -180,8 +183,9 @@ export class AppApiOptionsService implements AppOptionsService {
       );
       return new ResourcedResponse(
         response.data?.message,
-        response.data?.roles.map((tournamentTypeJson: TournamentTypeJson) =>
-          TournamentType.fromJson(tournamentTypeJson)
+        response.data?.tournament_types.map(
+          (tournamentTypeJson: TournamentTypeJson) =>
+            TournamentType.fromJson(tournamentTypeJson)
         )
       );
     } catch (error: any | Error | AxiosError) {
