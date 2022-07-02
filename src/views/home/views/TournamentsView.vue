@@ -6,16 +6,19 @@
           <h1>Torneos</h1>
         </div>
         <base-button
+          v-if="isListing"
           type="button"
           color="success"
           class="col-12 col-sm-12 col-md-4 col-lg-2"
+          @click="toView"
         >
           Nuevo Torneo
         </base-button>
       </div>
     </template>
+    <router-view v-if="!isListing" />
   </base-card>
-  <base-card>
+  <base-card v-if="isListing">
     <tournaments-table />
   </base-card>
 </template>
@@ -26,6 +29,18 @@ import { defineComponent } from "vue";
 export default defineComponent({
   components: {
     TournamentsTable,
+  },
+  computed: {
+    isListing(): boolean {
+      return !this.$route.path.includes("create");
+    },
+  },
+  methods: {
+    toView(): void {
+      this.$router.push({
+        name: "CreateTournament",
+      });
+    },
   },
 });
 </script>

@@ -11,6 +11,7 @@ import TournamentSystemsView from "@/views/home/views/TournamentSystemsView.vue"
 import TournamentTypesView from "@/views/home/views/TournamentTypesView.vue";
 import TournamentResultsView from "@/views/home/views/TournamentResultsView.vue";
 import TournamentsView from "@/views/home/views/TournamentsView.vue";
+import CreateTournamentView from "@/views/home/views/tournaments/CreateTournamentView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -166,7 +167,13 @@ const routes: Array<RouteRecordRaw> = [
             name: "gamepad",
           },
         },
-        children: [],
+        children: [
+          {
+            path: "create",
+            name: "CreateTournament",
+            component: CreateTournamentView,
+          },
+        ],
       },
     ],
   },
