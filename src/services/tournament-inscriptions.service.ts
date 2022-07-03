@@ -3,6 +3,7 @@ import {
   FETCH_TOURNAMENT_INSCRIPTIONS,
   GET_TOURNAMENT_INSCRIPTION,
   UPDATE_TOURNAMENT_INSCRIPTION,
+  UPDATE_TOURNAMENT_INSCRIPTION_STATUS,
 } from "@/config/services-uri.config";
 import { TournamentInscriptionJson } from "@/models/jsons/tournament-inscription.json";
 import { TournamentInscription } from "@/models/tournament-inscription.model";
@@ -26,6 +27,11 @@ export interface TournamentInscriptionsService {
   updateTournamentInscription(
     tournamentInscriptionId: string,
     attributes: { pokemonShowdownTeamExport: string },
+    token: string
+  ): Promise<BasicResponse>;
+  updateTournamentInscriptionStatus(
+    tournamentInscriptionId: string,
+    status: string,
     token: string
   ): Promise<BasicResponse>;
 }
@@ -124,6 +130,37 @@ export class ApiTournamentInscriptionsService
           ),
         {
           pokemon_showdown_team_export: attributes.pokemonShowdownTeamExport,
+        },
+        {
+          headers: {
+            ...this._buildTokenHeader(token),
+          },
+        }
+      );
+
+      return new BasicResponse(response.data?.message);
+    } catch (error: any | Error | AxiosError) {
+      throw new ResponseError(
+        error.response.data.message,
+        error.response.data.errors
+      );
+    }
+  }
+
+  async updateTournamentInscriptionStatus(
+    tournamentInscriptionId: string,
+    status: string,
+    token: string
+  ): Promise<BasicResponse> {
+    try {
+      const response = await this._httpClient.put(
+        API_DOMAIN +
+          UPDATE_TOURNAMENT_INSCRIPTION_STATUS.replace(
+            ":tournamentInscriptionId",
+            tournamentInscriptionId
+          ),
+        {
+          status,
         },
         {
           headers: {
