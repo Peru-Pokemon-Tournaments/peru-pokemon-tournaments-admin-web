@@ -37,6 +37,8 @@ export const UPDATE_DEVICE = "/api/devices/:deviceId";
 export const UPDATE_TOURNAMENT = "/api/tournaments/:tournamentId";
 export const UPDATE_TOURNAMENT_INSCRIPTION =
   "/api/inscriptions/:tournamentInscriptionId";
+export const UPDATE_TOURNAMENT_INSCRIPTION_STATUS =
+  "/api/inscriptions/:tournamentInscriptionId/status";
 export const UPDATE_TOURNAMENT_RULE = "/api/tournament-rules/:tournamentRuleId";
 export const UPDATE_TOURNAMENT_SYSTEM =
   "/api/tournament-systems/:tournamentSystemId";
