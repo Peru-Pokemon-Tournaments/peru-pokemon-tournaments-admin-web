@@ -6,6 +6,7 @@ import RolesView from "@/views/home/views/RolesView.vue";
 import DevicesView from "@/views/home/views/DevicesView.vue";
 import GamesView from "@/views/home/views/GamesView.vue";
 import GameGenerationsView from "@/views/home/views/GameGenerationsView.vue";
+import TournamentInscriptionsView from "@/views/home/views/TournamentInscriptionsView.vue";
 import TournamentRulesView from "@/views/home/views/TournamentRulesView.vue";
 import TournamentSystemsView from "@/views/home/views/TournamentSystemsView.vue";
 import TournamentTypesView from "@/views/home/views/TournamentTypesView.vue";
@@ -174,6 +175,20 @@ const routes: Array<RouteRecordRaw> = [
             component: CreateTournamentView,
           },
         ],
+      },
+      {
+        path: "/tournaments/inscriptions",
+        name: "TournamentInscriptions",
+        component: TournamentInscriptionsView,
+        meta: {
+          onSidebarName: "Inscripciones de Torneos",
+          inSidebar: true,
+          icon: {
+            prefix: "fas",
+            name: "marker",
+          },
+        },
+        children: [],
       },
     ],
   },
