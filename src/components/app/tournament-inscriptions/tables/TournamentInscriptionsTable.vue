@@ -25,7 +25,11 @@
         <base-cell tag="td">
           <base-badge
             :color="
-              tournamentInscription.status == 'accepted' ? 'success' : 'primary'
+              tournamentInscription.status == 'accepted'
+                ? 'success'
+                : tournamentInscription.status == 'pending'
+                ? 'primary'
+                : 'danger'
             "
           >
             {{ tournamentInscription.translatedStatus }}
@@ -80,6 +84,17 @@
       @after-submit="toggleEditModal"
     />
   </base-modal>
+  <base-modal
+    title="Editar Estado de Inscripción"
+    type="tiny"
+    :open="isEditStatusModalOpen"
+    @close="isEditStatusModalOpen = false"
+  >
+    <edit-tournament-inscription-status-form
+      :current-id="currentId"
+      @after-submit="toggleEditStatusModal"
+    />
+  </base-modal>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
@@ -87,16 +102,19 @@ import { mapActions, mapState } from "pinia";
 import { TournamentInscription } from "@/models/tournament-inscription.model";
 import { useTournamentInscriptionsStore } from "@/stores/tournament-inscriptions";
 import EditPokemonShowdownTeamExportForm from "../forms/EditPokemonShowdownTeamExportForm.vue";
+import EditTournamentInscriptionStatusForm from "../forms/EditTournamentInscriptionStatusForm.vue";
 
 export default defineComponent({
   components: {
     EditPokemonShowdownTeamExportForm,
+    EditTournamentInscriptionStatusForm,
   },
   data() {
     return {
       selectedTournamentInscription: null as TournamentInscription | null,
       isPopoverOpen: false,
       isEditModalOpen: false,
+      isEditStatusModalOpen: false,
       tableActions: [
         {
           key: "tournament-inscriptions/edit-team",
@@ -126,7 +144,10 @@ export default defineComponent({
       "tournamentInscriptionsHasChanged",
     ]),
     currentId(): string | null {
-      if (this.selectedTournamentInscription && this.isEditModalOpen) {
+      if (
+        this.selectedTournamentInscription &&
+        (this.isEditModalOpen || this.isEditStatusModalOpen)
+      ) {
         return this.selectedTournamentInscription.id;
       }
 
@@ -168,7 +189,7 @@ export default defineComponent({
           this.toggleEditModal();
           break;
         case "tournament-inscriptions/change-status":
-          // TODO: Handler change status
+          this.toggleEditStatusModal();
           break;
         case "tournament-inscriptions/delete":
           // TODO: Handler delete
@@ -178,6 +199,9 @@ export default defineComponent({
     },
     toggleEditModal(): void {
       this.isEditModalOpen = !this.isEditModalOpen;
+    },
+    toggleEditStatusModal(): void {
+      this.isEditStatusModalOpen = !this.isEditStatusModalOpen;
     },
   },
   watch: {
