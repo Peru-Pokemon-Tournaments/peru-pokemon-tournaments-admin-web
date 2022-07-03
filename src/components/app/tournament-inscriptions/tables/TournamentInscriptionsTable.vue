@@ -84,8 +84,13 @@ export default defineComponent({
       tableActions: [
         {
           key: "tournament-inscriptions/edit",
-          name: "Editar",
+          name: "Editar Equipo",
           icon: { name: "edit", type: "fas" },
+        },
+        {
+          key: "tournament-inscriptions/edit",
+          name: "Cambiar estado",
+          icon: { name: "exchange-alt", type: "fas" },
         },
         {
           key: "tournament-inscriptions/delete",
@@ -135,8 +140,11 @@ export default defineComponent({
     },
     onSelectAction(actionKey: string): void {
       switch (actionKey) {
-        case "tournament-inscription/edit":
-          // TODO: Handler edit
+        case "tournament-inscription/edit-team":
+          // TODO: Handler edit team
+          break;
+        case "tournament-inscription/change-status":
+          // TODO: Handler change status
           break;
         case "tournament-inscription/delete":
           // TODO: Handler delete
