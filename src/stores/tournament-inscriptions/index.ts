@@ -137,6 +137,38 @@ export const useTournamentInscriptionsStore = defineStore(
           this.updateSelectedTournamentInscriptionLoading = false;
         }
       },
+
+      async updateSelectedTournamentInscriptionStatus(
+        status: string
+      ): Promise<void> {
+        if (!this.hasSelectedTournamentInscription) {
+          return;
+        }
+
+        const userStore = useAuthStore();
+
+        this.updateSelectedTournamentInscriptionLoading = true;
+
+        try {
+          const response =
+            await this.tournamentInscriptionsService.updateTournamentInscriptionStatus(
+              this.selectedTournamentInscription!.id,
+              status,
+              userStore.authToken
+            );
+          this.tournamentInscriptionsChanged = true;
+          setTimeout(() => (this.tournamentInscriptionsChanged = false), 1000);
+          toast.success(response.message);
+        } catch (error: unknown | ResponseError) {
+          if (error instanceof ResponseError) {
+            toast.error(error.fullErrorMessage);
+          } else {
+            console.warn(error);
+          }
+        } finally {
+          this.updateSelectedTournamentInscriptionLoading = false;
+        }
+      },
     },
   }
 );
