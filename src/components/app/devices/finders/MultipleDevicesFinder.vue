@@ -2,6 +2,7 @@
   <multiple-finder-input
     @input="filterOptions"
     v-model="selectedOptions"
+    @change="updateModelValue"
     :options="deviceOptions"
   />
 </template>
@@ -56,17 +57,19 @@ export default defineComponent({
           value: name,
         }));
     },
-  },
-  watch: {
-    selectedOptions(value: { key: string; value: string }[]): void {
+    updateModelValue(value: { key: string; value: string }[]): void {
       const selectedDevices = value.map(({ key }) => ({ id: key }));
       this.$emit("update:modelValue", selectedDevices);
+    },
+  },
+  watch: {
+    modelValue() {
+      this.loadInitialSelectedOptions();
     },
   },
   async mounted(): Promise<void> {
     await this.fetchDevices();
     this.filteredDevices = this.devices;
-    this.loadInitialSelectedOptions();
   },
 });
 </script>

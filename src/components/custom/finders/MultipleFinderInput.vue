@@ -18,7 +18,7 @@ import { defineComponent, PropType } from "vue";
 import FinderInput from "./FinderInput.vue";
 
 export default defineComponent({
-  emits: ["update:modelValue", "input"],
+  emits: ["update:modelValue", "input", "change"],
   components: {
     FinderInput,
   },
@@ -80,6 +80,7 @@ export default defineComponent({
     },
     updateModelValue(value: { key: string; value: string }[]): void {
       this.$emit("update:modelValue", value);
+      this.$emit("change", value);
     },
   },
 });
