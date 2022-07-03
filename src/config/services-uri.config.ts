@@ -24,6 +24,8 @@ export const GET_GAME_GENERATION = "/api/game-generations/:gameGenerationId";
 export const GET_ROLE = "/api/roles/:roleId";
 export const GET_DEVICE = "/api/devices/:deviceId";
 export const GET_TOURNAMENT = "/api/tournaments/:tournamentId";
+export const GET_TOURNAMENT_INSCRIPTION =
+  "/api/inscriptions/:tournamentInscriptionId";
 export const GET_TOURNAMENT_RULE = "/api/tournament-rules/:tournamentRuleId";
 export const GET_TOURNAMENT_SYSTEM =
   "/api/tournament-systems/:tournamentSystemId";
@@ -33,6 +35,8 @@ export const UPDATE_GAME_GENERATION = "/api/game-generations/:gameGenerationId";
 export const UPDATE_ROLE = "/api/roles/:roleId";
 export const UPDATE_DEVICE = "/api/devices/:deviceId";
 export const UPDATE_TOURNAMENT = "/api/tournaments/:tournamentId";
+export const UPDATE_TOURNAMENT_INSCRIPTION =
+  "/api/inscriptions/:tournamentInscriptionId";
 export const UPDATE_TOURNAMENT_RULE = "/api/tournament-rules/:tournamentRuleId";
 export const UPDATE_TOURNAMENT_SYSTEM =
   "/api/tournament-systems/:tournamentSystemId";
