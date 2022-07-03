@@ -59,6 +59,10 @@ export class TournamentInscription
       return "aceptado";
     }
 
+    if (this.status === "rejected") {
+      return "rechazado";
+    }
+
     return "not found";
   }
 
