@@ -1,4 +1,6 @@
 const { defineConfig } = require("@vue/cli-service");
+const webpack = require("webpack");
+
 module.exports = defineConfig({
   transpileDependencies: true,
   css: {
@@ -13,5 +15,14 @@ module.exports = defineConfig({
         `,
       },
     },
+  },
+  configureWebpack: {
+    plugins: [
+      new webpack.DefinePlugin({
+        "process.env": {
+          VUE_APP_API_DOMAIN: process.env.VUE_APP_API_DOMAIN,
+        },
+      }),
+    ],
   },
 });
