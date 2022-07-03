@@ -1,3 +1,40 @@
 <template>
-  <h1>Tournament Inscriptions View</h1>
+  <base-card>
+    <template #header>
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-8 col-lg-10">
+          <h1>Inscripciones de Torneos</h1>
+        </div>
+        <base-button
+          type="button"
+          color="success"
+          class="col-12 col-sm-12 col-md-4 col-lg-2"
+        >
+          Nueva Inscripción
+        </base-button>
+      </div>
+    </template>
+  </base-card>
+  <base-card>
+    <tournament-inscriptions-table />
+  </base-card>
 </template>
+<script lang="ts">
+import TournamentInscriptionsTable from "@/components/app/tournament-inscriptions/tables/TournamentInscriptionsTable.vue";
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  components: {
+    TournamentInscriptionsTable,
+  },
+});
+</script>
+<style lang="scss" scoped>
+@include form-group;
+@include responsive-grid;
+@include layout;
+h1 {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+</style>
