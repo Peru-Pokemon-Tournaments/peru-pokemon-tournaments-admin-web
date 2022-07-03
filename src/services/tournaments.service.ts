@@ -15,6 +15,7 @@ import { PaginatedResponse } from "./interfaces/paginated-response";
 import { ResourcedResponse } from "./interfaces/resourced-response";
 import { ResponseError } from "./interfaces/response-error";
 import { format } from "date-fns";
+import { Tournament } from "@/models/tournament.model";
 
 export interface TournamentsService {
   fetchTournaments(
@@ -29,7 +30,7 @@ export interface TournamentsService {
   getTournament(
     tournamentId: string,
     token: string
-  ): Promise<ResourcedResponse<SmallTournament>>;
+  ): Promise<ResourcedResponse<Tournament>>;
   updateTournament(
     tournamentId: string,
     attributes: CreateOrEditTournamentDTO,
@@ -187,7 +188,7 @@ export class ApiTournamentsService implements TournamentsService {
   async getTournament(
     tournamentId: string,
     token: string
-  ): Promise<ResourcedResponse<SmallTournament>> {
+  ): Promise<ResourcedResponse<Tournament>> {
     try {
       const response = await this._httpClient.get(
         API_DOMAIN + GET_TOURNAMENT.replace(":tournamentId", tournamentId),
@@ -200,7 +201,7 @@ export class ApiTournamentsService implements TournamentsService {
 
       return new ResourcedResponse(
         response.data?.message,
-        SmallTournament.fromJson(response.data?.tournament)
+        Tournament.fromJson(response.data?.tournament)
       );
     } catch (error: any | Error | AxiosError) {
       throw new ResponseError(
