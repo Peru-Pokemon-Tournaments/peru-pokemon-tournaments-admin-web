@@ -14,6 +14,7 @@ const addIcons = () => {
     FasIcons.faGamepad,
     FasIcons.faKey,
     FasIcons.faListOl,
+    FasIcons.faMarker,
     FasIcons.faPoll,
     FasIcons.faShapes,
     FasIcons.faSignOutAlt,
