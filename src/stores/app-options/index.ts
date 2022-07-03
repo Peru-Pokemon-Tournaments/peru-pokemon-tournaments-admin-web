@@ -12,6 +12,7 @@ export const useAppOptionsStore = defineStore("useAppOptions", {
       gameGenerations: [],
       games: [],
       roles: [],
+      tournamentInscriptionStatues: [],
       tournamentFormats: [],
       tournamentRules: [],
       tournamentSystems: [],
@@ -24,6 +25,7 @@ export const useAppOptionsStore = defineStore("useAppOptions", {
       await this.fetchGameGenerations();
       await this.fetchGames();
       await this.fetchRoles();
+      await this.fetchTournamentInscriptionStatuses();
       await this.fetchTournamentFormats();
       await this.fetchTournamentRules();
       await this.fetchTournamentSystems();
@@ -69,6 +71,19 @@ export const useAppOptionsStore = defineStore("useAppOptions", {
       try {
         const response = await this.appOptionsService.getRoles();
         this.roles = response.resource;
+      } catch (error: unknown | ResponseError) {
+        if (error instanceof ResponseError) {
+          toast.error(error.fullErrorMessage);
+        } else {
+          console.warn(error);
+        }
+      }
+    },
+    async fetchTournamentInscriptionStatuses(): Promise<void> {
+      try {
+        const response =
+          await this.appOptionsService.getTournamentInscriptionStatuses();
+        this.tournamentInscriptionStatues = response.resource;
       } catch (error: unknown | ResponseError) {
         if (error instanceof ResponseError) {
           toast.error(error.fullErrorMessage);

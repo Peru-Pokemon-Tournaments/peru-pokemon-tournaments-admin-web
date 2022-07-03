@@ -12,6 +12,7 @@ export interface AppOptionsStoreState {
   gameGenerations: GameGeneration[];
   games: Game[];
   roles: Role[];
+  tournamentInscriptionStatues: { key: string; value: string }[];
   tournamentFormats: TournamentFormat[];
   tournamentRules: TournamentRule[];
   tournamentSystems: TournamentSystem[];
