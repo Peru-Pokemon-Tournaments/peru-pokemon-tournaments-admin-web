@@ -4,6 +4,7 @@
       <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12">
         <base-file-input
           v-model="tournamentDTO.tournamentImageFile"
+          :previousSrc="tournamentDTO.image.url"
           :disabled="isLoading"
         />
       </div>
@@ -137,6 +138,7 @@
 <script lang="ts">
 import { CreateOrEditTournamentDTO } from "./interfaces/CreateOrEditTournamentDTO";
 import { defineComponent, PropType } from "vue";
+import { format } from "date-fns";
 import { mapActions, mapState } from "pinia";
 import { useAppOptionsStore } from "@/stores/app-options";
 import { useTournamentsStore } from "@/stores/tournaments";
@@ -191,6 +193,10 @@ export default defineComponent({
         tournamentSystems: [],
         tournamentRules: [],
         tournamentImageFile: null,
+        image: {
+          id: null,
+          url: null,
+        },
       } as CreateOrEditTournamentDTO,
       isSubmitted: false,
     };
@@ -318,6 +324,35 @@ export default defineComponent({
     selectedTournament(): void {
       if (this.selectedTournament) {
         this.tournamentDTO.title = this.selectedTournament.title;
+        this.tournamentDTO.description = this.selectedTournament.description;
+        this.tournamentDTO.place = this.selectedTournament.place;
+        this.tournamentDTO.tournamentType =
+          this.selectedTournament.tournamentType;
+        this.tournamentDTO.tournamentFormat =
+          this.selectedTournament.tournamentFormat;
+        this.tournamentDTO.tournamentPrice =
+          this.selectedTournament.tournamentPrice;
+        this.tournamentDTO.games = this.selectedTournament.games;
+        this.tournamentDTO.devices = this.selectedTournament.devices;
+        this.tournamentDTO.tournamentRules =
+          this.selectedTournament.tournamentRules;
+        this.tournamentDTO.tournamentSystems =
+          this.selectedTournament.tournamentSystems;
+        this.tournamentDTO.tournamentPrizes =
+          this.selectedTournament.tournamentPrizes;
+        this.tournamentDTO.startDate = format(
+          this.selectedTournament.startDate,
+          "yyyy-MM-dd'T'hh:mm"
+        );
+        this.tournamentDTO.endDate = format(
+          this.selectedTournament.endDate,
+          "yyyy-MM-dd'T'hh:mm"
+        );
+
+        if (this.selectedTournament.image) {
+          this.tournamentDTO.image.id = this.selectedTournament.image.id;
+          this.tournamentDTO.image.url = this.selectedTournament.image.url;
+        }
       }
     },
   },

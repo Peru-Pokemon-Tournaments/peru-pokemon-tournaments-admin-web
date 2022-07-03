@@ -35,4 +35,8 @@ export interface CreateOrEditTournamentDTO {
     id: string;
   }[];
   tournamentImageFile: null | Blob | string;
+  image: {
+    id: string | null;
+    url: string | null;
+  };
 }
