@@ -31,7 +31,7 @@
         </base-cell>
         <base-cell tag="td">
           <base-badge color="danger">
-            {{ tournament.startDate.toString("dd/MM/yyyy hh:mm tt") }}
+            {{ tournament.endDate.toString("dd/MM/yyyy hh:mm tt") }}
           </base-badge>
         </base-cell>
         <base-cell tag="td">

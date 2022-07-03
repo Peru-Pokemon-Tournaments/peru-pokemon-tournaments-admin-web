@@ -342,11 +342,11 @@ export default defineComponent({
           this.selectedTournament.tournamentPrizes;
         this.tournamentDTO.startDate = format(
           this.selectedTournament.startDate,
-          "yyyy-MM-dd'T'hh:mm"
+          "yyyy-MM-dd'T'HH:mm"
         );
         this.tournamentDTO.endDate = format(
           this.selectedTournament.endDate,
-          "yyyy-MM-dd'T'hh:mm"
+          "yyyy-MM-dd'T'HH:mm"
         );
 
         if (this.selectedTournament.image) {
