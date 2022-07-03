@@ -34,6 +34,9 @@ export interface AppOptionsService {
   getGameGenerations(): Promise<ResourcedResponse<GameGeneration[]>>;
   getGames(): Promise<ResourcedResponse<Game[]>>;
   getRoles(): Promise<ResourcedResponse<Role[]>>;
+  getTournamentInscriptionStatuses(): Promise<
+    ResourcedResponse<{ key: string; value: string }[]>
+  >;
   getTournamentFormats(): Promise<ResourcedResponse<TournamentFormat[]>>;
   getTournamentRules(): Promise<ResourcedResponse<TournamentRule[]>>;
   getTournamentSystems(): Promise<ResourcedResponse<TournamentSystem[]>>;
@@ -107,6 +110,41 @@ export class AppApiOptionsService implements AppOptionsService {
         response.data?.roles.map((roleJson: RoleJson) =>
           Role.fromJson(roleJson)
         )
+      );
+    } catch (error: any | Error | AxiosError) {
+      throw new ResponseError(
+        error.response.data.message,
+        error.response.data.errors
+      );
+    }
+  }
+
+  async getTournamentInscriptionStatuses(): Promise<
+    ResourcedResponse<{ key: string; value: string }[]>
+  > {
+    try {
+      const response = {
+        data: {
+          message: "Estados de Inscripción encontradas",
+          tournament_inscription_statuses: [
+            {
+              key: "accepted",
+              value: "Aceptado",
+            },
+            {
+              key: "pending",
+              value: "Pendiente",
+            },
+            {
+              key: "rejected",
+              value: "Rechazado",
+            },
+          ],
+        },
+      };
+      return new ResourcedResponse(
+        response.data?.message,
+        response.data?.tournament_inscription_statuses
       );
     } catch (error: any | Error | AxiosError) {
       throw new ResponseError(
