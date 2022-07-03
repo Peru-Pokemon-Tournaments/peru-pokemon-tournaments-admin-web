@@ -69,26 +69,42 @@
     :total-pages="totalPages"
     @select-page="loadTournamentInscriptions"
   />
+  <base-modal
+    title="Editar Inscripción"
+    type="small"
+    :open="isEditModalOpen"
+    @close="isEditModalOpen = false"
+  >
+    <edit-pokemon-showdown-team-export-form
+      :current-id="currentId"
+      @after-submit="toggleEditModal"
+    />
+  </base-modal>
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
 import { mapActions, mapState } from "pinia";
 import { TournamentInscription } from "@/models/tournament-inscription.model";
 import { useTournamentInscriptionsStore } from "@/stores/tournament-inscriptions";
+import EditPokemonShowdownTeamExportForm from "../forms/EditPokemonShowdownTeamExportForm.vue";
 
 export default defineComponent({
+  components: {
+    EditPokemonShowdownTeamExportForm,
+  },
   data() {
     return {
       selectedTournamentInscription: null as TournamentInscription | null,
       isPopoverOpen: false,
+      isEditModalOpen: false,
       tableActions: [
         {
-          key: "tournament-inscriptions/edit",
+          key: "tournament-inscriptions/edit-team",
           name: "Editar Equipo",
           icon: { name: "edit", type: "fas" },
         },
         {
-          key: "tournament-inscriptions/edit",
+          key: "tournament-inscriptions/change-status",
           name: "Cambiar estado",
           icon: { name: "exchange-alt", type: "fas" },
         },
@@ -107,7 +123,15 @@ export default defineComponent({
       "currentPage",
       "perPage",
       "isLoadingTournamentInscriptions",
+      "tournamentInscriptionsHasChanged",
     ]),
+    currentId(): string | null {
+      if (this.selectedTournamentInscription && this.isEditModalOpen) {
+        return this.selectedTournamentInscription.id;
+      }
+
+      return null;
+    },
   },
   methods: {
     ...mapActions(useTournamentInscriptionsStore, [
@@ -140,17 +164,27 @@ export default defineComponent({
     },
     onSelectAction(actionKey: string): void {
       switch (actionKey) {
-        case "tournament-inscription/edit-team":
-          // TODO: Handler edit team
+        case "tournament-inscriptions/edit-team":
+          this.toggleEditModal();
           break;
-        case "tournament-inscription/change-status":
+        case "tournament-inscriptions/change-status":
           // TODO: Handler change status
           break;
-        case "tournament-inscription/delete":
+        case "tournament-inscriptions/delete":
           // TODO: Handler delete
           break;
       }
       this.isPopoverOpen = false;
+    },
+    toggleEditModal(): void {
+      this.isEditModalOpen = !this.isEditModalOpen;
+    },
+  },
+  watch: {
+    tournamentInscriptionsHasChanged(changed: boolean): void {
+      if (changed) {
+        this.fetchTournamentInscriptions();
+      }
     },
   },
   mounted(): void {
