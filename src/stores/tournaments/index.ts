@@ -5,6 +5,7 @@ import { useToast } from "vue-toastification";
 import * as Types from "./types";
 import { SmallTournament } from "@/models/small-tournament.model";
 import { CreateOrEditTournamentDTO } from "@/components/app/tournaments/forms/interfaces/CreateOrEditTournamentDTO";
+import { Tournament } from "@/models/tournament.model";
 
 const toast = useToast();
 
@@ -12,7 +13,7 @@ export const useTournamentsStore = defineStore("useTournaments", {
   state(): Types.TournamentsStoreState {
     return {
       tournaments: [] as SmallTournament[],
-      selectedTournament: null as SmallTournament | null,
+      selectedTournament: null as Tournament | null,
       totalPages: 1,
       currentPage: 1,
       lastPage: 1,
