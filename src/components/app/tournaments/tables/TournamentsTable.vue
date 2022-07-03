@@ -147,7 +147,12 @@ export default defineComponent({
     onSelectAction(actionKey: string): void {
       switch (actionKey) {
         case "tournaments/edit":
-          // TODO: Handler edit
+          this.$router.push({
+            name: "EditTournament",
+            params: {
+              tournamentId: this.selectedTournament!.id,
+            },
+          });
           break;
         case "tournaments/delete":
           // TODO: Handler delete
