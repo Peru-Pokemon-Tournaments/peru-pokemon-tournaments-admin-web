@@ -32,7 +32,9 @@ export default defineComponent({
   },
   computed: {
     isListing(): boolean {
-      return !this.$route.path.includes("create");
+      return !(
+        this.$route.path.includes("create") || this.$route.path.includes("edit")
+      );
     },
   },
   methods: {

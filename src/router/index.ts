@@ -13,6 +13,7 @@ import TournamentTypesView from "@/views/home/views/TournamentTypesView.vue";
 import TournamentResultsView from "@/views/home/views/TournamentResultsView.vue";
 import TournamentsView from "@/views/home/views/TournamentsView.vue";
 import CreateTournamentView from "@/views/home/views/tournaments/CreateTournamentView.vue";
+import EditTournamentView from "@/views/home/views/tournaments/EditTournamentView.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -173,6 +174,12 @@ const routes: Array<RouteRecordRaw> = [
             path: "create",
             name: "CreateTournament",
             component: CreateTournamentView,
+          },
+          {
+            path: ":tournamentId/edit",
+            name: "EditTournament",
+            component: EditTournamentView,
+            props: true,
           },
         ],
       },
