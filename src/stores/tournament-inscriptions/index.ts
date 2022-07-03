@@ -12,12 +12,16 @@ export const useTournamentInscriptionsStore = defineStore(
   {
     state(): Types.TournamentInscriptionsStoreState {
       return {
-        tournamentInscriptions: [] as TournamentInscription[],
+        tournamentInscriptions: [],
+        selectedTournamentInscription: null,
         totalPages: 1,
         currentPage: 1,
         lastPage: 1,
         perPage: 15,
         loadingTournamentInscriptions: false,
+        updateSelectedTournamentInscriptionLoading: false,
+        getSelectedTournamentInscriptionLoading: false,
+        tournamentInscriptionsChanged: false,
       };
     },
     getters: {
@@ -26,6 +30,18 @@ export const useTournamentInscriptionsStore = defineStore(
       },
       isLoadingTournamentInscriptions(): boolean {
         return this.loadingTournamentInscriptions;
+      },
+      isUpdateSelectedTournamentInscriptionLoading(): boolean {
+        return this.updateSelectedTournamentInscriptionLoading;
+      },
+      isGetSelectedTournamentInscriptionLoading(): boolean {
+        return this.getSelectedTournamentInscriptionLoading;
+      },
+      tournamentInscriptionsHasChanged(): boolean {
+        return this.tournamentInscriptionsChanged;
+      },
+      hasSelectedTournamentInscription(): boolean {
+        return this.selectedTournamentInscription != null;
       },
     },
     actions: {
@@ -60,6 +76,65 @@ export const useTournamentInscriptionsStore = defineStore(
           }
         } finally {
           this.loadingTournamentInscriptions = false;
+        }
+      },
+
+      async selectTournamentInscription(
+        tournamentInscriptionId: string
+      ): Promise<void> {
+        const userStore = useAuthStore();
+
+        this.getSelectedTournamentInscriptionLoading = true;
+        this.selectedTournamentInscription = null;
+
+        try {
+          const response =
+            await this.tournamentInscriptionsService.getTournamentInscription(
+              tournamentInscriptionId,
+              userStore.authToken
+            );
+
+          this.selectedTournamentInscription = response.resource;
+        } catch (error: unknown | ResponseError) {
+          if (error instanceof ResponseError) {
+            toast.error(error.fullErrorMessage);
+          } else {
+            console.warn(error);
+          }
+        } finally {
+          this.getSelectedTournamentInscriptionLoading = false;
+        }
+      },
+
+      async updateSelectedTournamentInscription(attributes: {
+        pokemonShowdownTeamExport: string;
+      }): Promise<void> {
+        if (!this.hasSelectedTournamentInscription) {
+          return;
+        }
+
+        const userStore = useAuthStore();
+
+        this.updateSelectedTournamentInscriptionLoading = true;
+
+        try {
+          const response =
+            await this.tournamentInscriptionsService.updateTournamentInscription(
+              this.selectedTournamentInscription!.id,
+              attributes,
+              userStore.authToken
+            );
+          this.tournamentInscriptionsChanged = true;
+          setTimeout(() => (this.tournamentInscriptionsChanged = false), 1000);
+          toast.success(response.message);
+        } catch (error: unknown | ResponseError) {
+          if (error instanceof ResponseError) {
+            toast.error(error.fullErrorMessage);
+          } else {
+            console.warn(error);
+          }
+        } finally {
+          this.updateSelectedTournamentInscriptionLoading = false;
         }
       },
     },
