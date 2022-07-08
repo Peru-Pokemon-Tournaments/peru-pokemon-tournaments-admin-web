@@ -6,6 +6,7 @@
       <base-cell tag="th">Torneo</base-cell>
       <base-cell tag="th">Estado</base-cell>
       <base-cell tag="th">Competidor</base-cell>
+      <base-cell tag="th">Apellidos y Nombres</base-cell>
       <base-cell tag="th">Acciones</base-cell>
     </template>
     <template #body>
@@ -37,6 +38,9 @@
         </base-cell>
         <base-cell tag="td">
           {{ tournamentInscription.competitor.nickName }}
+        </base-cell>
+        <base-cell tag="td">
+          {{ tournamentInscription.competitor.fullName }}
         </base-cell>
         <base-cell tag="td">
           <base-button
