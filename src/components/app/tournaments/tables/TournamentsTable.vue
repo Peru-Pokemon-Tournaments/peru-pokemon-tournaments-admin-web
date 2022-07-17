@@ -103,6 +103,11 @@ export default defineComponent({
           icon: { name: "edit", type: "fas" },
         },
         {
+          key: "tournaments/results",
+          name: "Resultados",
+          icon: { name: "edit", type: "fas" },
+        },
+        {
           key: "tournaments/delete",
           name: "Eliminar",
           icon: { name: "trash-alt", type: "fas" },
@@ -149,6 +154,14 @@ export default defineComponent({
         case "tournaments/edit":
           this.$router.push({
             name: "EditTournament",
+            params: {
+              tournamentId: this.selectedTournament!.id,
+            },
+          });
+          break;
+        case "tournaments/results":
+          this.$router.push({
+            name: "TournamentResults",
             params: {
               tournamentId: this.selectedTournament!.id,
             },

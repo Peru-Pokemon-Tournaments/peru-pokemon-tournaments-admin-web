@@ -16,6 +16,10 @@ import {
   TournamentInscriptionsService,
 } from "@/services/tournament-inscriptions.service";
 import {
+  ApiTournamentResultsService,
+  TournamentResultsService,
+} from "@/services/tournament-results.service";
+import {
   ApiTournamentRulesService,
   TournamentRulesService,
 } from "@/services/tournament-rules.service";
@@ -46,6 +50,8 @@ const peopleService: PeopleService = new ApiPeopleService(httpClient);
 const rolesService: RolesService = new ApiRolesService(httpClient);
 const tournamentInscriptionsService: TournamentInscriptionsService =
   new ApiTournamentInscriptionsService(httpClient);
+const tournamentResultsService: TournamentResultsService =
+  new ApiTournamentResultsService(httpClient);
 const tournamentRulesService: TournamentRulesService =
   new ApiTournamentRulesService(httpClient);
 const tournamentSystemsService: TournamentSystemsService =
@@ -65,6 +71,7 @@ const ServiceProvider = {
   peopleService,
   rolesService,
   tournamentInscriptionsService,
+  tournamentResultsService,
   tournamentRulesService,
   tournamentSystemsService,
   tournamentTypesService,

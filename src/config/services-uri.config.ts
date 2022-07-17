@@ -7,6 +7,8 @@ export const FETCH_GAMES = "/api/games";
 export const FETCH_PEOPLE = "/api/people";
 export const FETCH_ROLES = "/api/roles";
 export const FETCH_TOURNAMENT_INSCRIPTIONS = "/api/inscriptions";
+export const FETCH_TOURNAMENT_RESULTS =
+  "/api/tournaments/:tournamentId/results";
 export const FETCH_TOURNAMENT_RULES = "/api/tournament-rules";
 export const FETCH_TOURNAMENT_SYSTEMS = "/api/tournament-systems";
 export const FETCH_TOURNAMENT_TYPES = "/api/tournament-types";

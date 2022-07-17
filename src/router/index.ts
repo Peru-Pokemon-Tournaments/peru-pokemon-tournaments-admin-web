@@ -10,7 +10,7 @@ import TournamentInscriptionsView from "@/views/home/views/TournamentInscription
 import TournamentRulesView from "@/views/home/views/TournamentRulesView.vue";
 import TournamentSystemsView from "@/views/home/views/TournamentSystemsView.vue";
 import TournamentTypesView from "@/views/home/views/TournamentTypesView.vue";
-import TournamentResultsView from "@/views/home/views/TournamentResultsView.vue";
+import TournamentResultsView from "@/views/home/views/tournaments/TournamentResultsView.vue";
 import TournamentsView from "@/views/home/views/TournamentsView.vue";
 import CreateTournamentView from "@/views/home/views/tournaments/CreateTournamentView.vue";
 import EditTournamentView from "@/views/home/views/tournaments/EditTournamentView.vue";
@@ -179,6 +179,12 @@ const routes: Array<RouteRecordRaw> = [
             path: ":tournamentId/edit",
             name: "EditTournament",
             component: EditTournamentView,
+            props: true,
+          },
+          {
+            path: ":tournamentId/results",
+            name: "TournamentResults",
+            component: TournamentResultsView,
             props: true,
           },
         ],

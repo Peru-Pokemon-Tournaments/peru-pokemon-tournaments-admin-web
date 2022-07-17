@@ -7,6 +7,7 @@ import { GamesService } from "./services/games.service";
 import { PeopleService } from "./services/people.service";
 import { RolesService } from "./services/roles.service";
 import { TournamentInscriptionsService } from "./services/tournament-inscriptions.service";
+import { TournamentResultsService } from "./services/tournament-results.service";
 import { TournamentRulesService } from "./services/tournament-rules.service";
 import { TournamentSystemsService } from "./services/tournament-systems.service";
 import { TournamentTypesService } from "./services/tournament-types.service";
@@ -22,6 +23,7 @@ declare module "pinia" {
     peopleService: PeopleService;
     rolesService: RolesService;
     tournamentInscriptionsService: TournamentInscriptionsService;
+    tournamentResultsService: TournamentResultsService;
     tournamentRulesService: TournamentRulesService;
     tournamentSystemsService: TournamentSystemsService;
     tournamentTypesService: TournamentTypesService;

@@ -1,5 +1,5 @@
 <template>
-  <base-card>
+  <base-card v-if="!isListingResults">
     <template #header>
       <div class="row">
         <div class="col-12 col-sm-12 col-md-8 col-lg-10">
@@ -18,9 +18,10 @@
     </template>
     <router-view v-if="!isListing" />
   </base-card>
-  <base-card v-if="isListing">
+  <base-card v-if="isListing && !isListingResults">
     <tournaments-table />
   </base-card>
+  <router-view v-if="isListingResults" />
 </template>
 <script lang="ts">
 import TournamentsTable from "@/components/app/tournaments/tables/TournamentsTable.vue";
@@ -35,6 +36,9 @@ export default defineComponent({
       return !(
         this.$route.path.includes("create") || this.$route.path.includes("edit")
       );
+    },
+    isListingResults(): boolean {
+      return this.$route.path.includes("results");
     },
   },
   methods: {
