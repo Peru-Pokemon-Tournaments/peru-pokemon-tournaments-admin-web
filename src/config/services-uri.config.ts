@@ -18,6 +18,8 @@ export const CREATE_GAME_GENERATION = "/api/game-generations";
 export const CREATE_ROLE = "/api/roles";
 export const CREATE_DEVICE = "/api/devices";
 export const CREATE_TOURNAMENT = "/api/tournaments";
+export const CREATE_TOURNAMENT_RESULT =
+  "/api/tournaments/:tournamentId/results";
 export const CREATE_TOURNAMENT_RULE = "/api/tournament-rules";
 export const CREATE_TOURNAMENT_SYSTEM = "/api/tournament-systems";
 export const CREATE_TOURNAMENT_TYPE = "/api/tournament-types";
@@ -28,6 +30,8 @@ export const GET_DEVICE = "/api/devices/:deviceId";
 export const GET_TOURNAMENT = "/api/tournaments/:tournamentId";
 export const GET_TOURNAMENT_INSCRIPTION =
   "/api/inscriptions/:tournamentInscriptionId";
+export const GET_TOURNAMENT_RESULT =
+  "/api/tournaments/:tournamentId/results/:tournamentResultId";
 export const GET_TOURNAMENT_RULE = "/api/tournament-rules/:tournamentRuleId";
 export const GET_TOURNAMENT_SYSTEM =
   "/api/tournament-systems/:tournamentSystemId";
@@ -41,6 +45,8 @@ export const UPDATE_TOURNAMENT_INSCRIPTION =
   "/api/inscriptions/:tournamentInscriptionId";
 export const UPDATE_TOURNAMENT_INSCRIPTION_STATUS =
   "/api/inscriptions/:tournamentInscriptionId/status";
+export const UPDATE_TOURNAMENT_RESULT =
+  "/api/tournaments/:tournamentId/results/:tournamentResultId";
 export const UPDATE_TOURNAMENT_RULE = "/api/tournament-rules/:tournamentRuleId";
 export const UPDATE_TOURNAMENT_SYSTEM =
   "/api/tournament-systems/:tournamentSystemId";
