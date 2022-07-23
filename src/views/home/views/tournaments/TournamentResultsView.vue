@@ -9,6 +9,7 @@
           type="button"
           color="success"
           class="col-12 col-sm-12 col-md-4 col-lg-2"
+          @click="toggleCreateModal"
         >
           Agregar Resultado
         </base-button>
@@ -18,22 +19,37 @@
   <base-card>
     <tournament-results-table :tournamentId="tournamentId" />
   </base-card>
+  <base-modal
+    title="Nuevo Resultado"
+    type="tiny"
+    :open="isCreateModalOpen"
+    @close="toggleCreateModal"
+  >
+    <create-or-edit-tournament-result-form @after-submit="closeModal" />
+  </base-modal>
 </template>
 <script lang="ts">
 import TournamentResultsTable from "@/components/app/tournament-results/tables/TournamentResultsTable.vue";
 import { useTournamentsStore } from "@/stores/tournaments";
 import { mapActions, mapState } from "pinia";
 import { defineComponent, PropType } from "vue";
+import CreateOrEditTournamentResultForm from "@/components/app/tournament-results/forms/CreateOrEditTournamentResultForm.vue";
 
 export default defineComponent({
   components: {
     TournamentResultsTable,
+    CreateOrEditTournamentResultForm,
   },
   props: {
     tournamentId: {
       type: String as PropType<string>,
       required: true,
     },
+  },
+  data() {
+    return {
+      isCreateModalOpen: false,
+    };
   },
   computed: {
     ...mapState(useTournamentsStore, ["selectedTournament"]),
@@ -47,6 +63,12 @@ export default defineComponent({
   },
   methods: {
     ...mapActions(useTournamentsStore, ["selectTournament"]),
+    toggleCreateModal() {
+      this.isCreateModalOpen = !this.isCreateModalOpen;
+    },
+    closeModal(): void {
+      this.toggleCreateModal();
+    },
   },
   mounted(): void {
     this.selectTournament(this.tournamentId);
