@@ -60,7 +60,7 @@ export class ApiTournamentInscriptionsService
           params: {
             page: page,
             pageSize: pageSize,
-            filters: filters,
+            "filters[tournament][id]": filters?.tournament.id,
           },
           headers: {
             ...this._buildTokenHeader(token),
