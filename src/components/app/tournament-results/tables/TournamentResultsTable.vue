@@ -109,6 +109,7 @@ export default defineComponent({
       "currentPage",
       "perPage",
       "isLoadingTournamentResults",
+      "tournamentResultsHasChanged",
     ]),
     currentId(): string | null {
       if (this.selectedTournamentResult && this.isEditModalOpen) {
@@ -156,6 +157,13 @@ export default defineComponent({
     },
     toggleEditModal(): void {
       this.isEditModalOpen = !this.isEditModalOpen;
+    },
+  },
+  watch: {
+    tournamentResultsHasChanged(changed: boolean): void {
+      if (changed) {
+        this.fetchTournamentResults(this.tournamentId);
+      }
     },
   },
   mounted(): void {
